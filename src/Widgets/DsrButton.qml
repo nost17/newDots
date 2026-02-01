@@ -16,6 +16,8 @@ Item {
     property alias rightPadding: contentItem.rightPadding
     property alias bottomPadding: contentItem.bottomPadding
     property alias topPadding: contentItem.topPadding
+    property bool hovered: mouse.containsMouse
+    property bool pressed: mouse.pressed
 
     implicitWidth: contentItem.implicitWidth
     implicitHeight: contentItem.implicitHeight
@@ -25,7 +27,7 @@ Item {
     Item {
         implicitHeight: root.implicitHeight
         implicitWidth: root.implicitWidth
-        scale: overlayRect.pressed ? 0.96 : 1
+        scale: root.pressed ? 0.96 : 1
         Rectangle {
             id: backgroundRect
             anchors.fill: parent
@@ -42,17 +44,24 @@ Item {
                 }
             }
         }
+
+        Row {
+            id: contentItem
+            anchors.centerIn: root.centered ? parent : null
+            spacing: 5
+            opacity: root.hovered ? 0.9 : 1
+            padding: root.padding
+        }
+
         Rectangle {
             id: overlayRect
-            property bool hovered: mouse.containsMouse
-            property bool pressed: mouse.pressed
             anchors.fill: parent
             radius: root.radius
             color: "black"
             opacity: {
-                if (pressed) {
+                if (root.pressed) {
                     return 0.2;
-                } else if (hovered) {
+                } else if (root.hovered) {
                     return 0.1;
                 } else {
                     return 0;
@@ -65,14 +74,6 @@ Item {
                     easing.type: Easing.OutCubic
                 }
             }
-        }
-
-        Row {
-            id: contentItem
-            anchors.centerIn: root.centered ? parent: null
-            spacing: 5
-            opacity: overlayRect.hovered ? 0.9 : 1
-            padding: root.padding
         }
 
         Behavior on scale {
