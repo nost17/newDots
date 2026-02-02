@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import qs.src.Panels.Bar.Components
 
 PanelWindow {
-    id: root
+    id: rootBar
     anchors {
         top: true
         right: true
@@ -12,23 +12,23 @@ PanelWindow {
     }
     implicitHeight: 44
     Rectangle {
-        id: rootRect
+        id: barBackground
         anchors.fill: parent
         anchors.margins: 4
         anchors.leftMargin: 12
         anchors.rightMargin: 12
-        readonly property int heightItems: root.implicitHeight - anchors.margins * 2
+        readonly property int heightItems: rootBar.implicitHeight - anchors.margins * 2
         color: "transparent"
         RowLayout {
             anchors.fill: parent
             spacing: 10
             Layout.alignment: Qt.AlignHCenter
             Launcher {
-                implicitHeight: rootRect.heightItems
-                implicitWidth: rootRect.heightItems
+                implicitHeight: barBackground.heightItems
+                implicitWidth: barBackground.heightItems
             }
             Clock {
-                implicitHeight: rootRect.heightItems
+                implicitHeight: barBackground.heightItems
             }
         }
     }
