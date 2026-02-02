@@ -23,6 +23,13 @@ PanelWindow {
             anchors.fill: parent
             spacing: 10
             Layout.alignment: Qt.AlignHCenter
+            Launcher {
+                implicitHeight: rootRect.heightItems
+                implicitWidth: rootRect.heightItems
+            }
+            Clock {
+                implicitHeight: rootRect.heightItems
+            }
         }
     }
 }
