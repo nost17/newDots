@@ -22,11 +22,14 @@ PanelWindow {
         RowLayout {
             anchors.left: barBackground.left
             spacing: 10
-            Layout.alignment: Qt.AlignHCenter
             Launcher {
                 implicitHeight: barBackground.heightItems
                 implicitWidth: barBackground.heightItems
             }
+        }
+        RowLayout {
+            anchors.right: barBackground.right
+            spacing: 10
             Clock {
                 implicitHeight: barBackground.heightItems
             }
