@@ -20,7 +20,7 @@ PanelWindow {
         readonly property int heightItems: rootBar.implicitHeight - anchors.margins * 2
         color: "transparent"
         RowLayout {
-            anchors.fill: parent
+            anchors.left: barBackground.left
             spacing: 10
             Layout.alignment: Qt.AlignHCenter
             Launcher {
