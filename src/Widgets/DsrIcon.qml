@@ -31,7 +31,7 @@ Item {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         font.variableAxes: {
-            "FILL": fill,
+            "FILL": fill
             // "opsz": root.size,
             // "wght": root.weight
         }
