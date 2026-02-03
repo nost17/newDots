@@ -30,7 +30,7 @@ PanelWindow {
             spacing: 10
             Launcher {
                 implicitHeight: barMargin.heightItems
-                implicitWidth: barMargin.heightItems
+                // implicitWidth: barMargin.heightItems
             }
         }
         RowLayout {
