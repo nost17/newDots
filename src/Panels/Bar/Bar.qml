@@ -1,7 +1,8 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import qs.src.Panels.Bar.Components
+import "./Components"
+import "../../Common"
 
 PanelWindow {
     id: rootBar
@@ -14,6 +15,7 @@ PanelWindow {
     Rectangle {
         id: barBackground
         anchors.fill: parent
+        color: Theme.backgroundPrimary
     }
     Rectangle {
         id: barMargin

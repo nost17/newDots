@@ -1,13 +1,14 @@
 import QtQuick
+import "../Common"
 
 Text {
-    property string fontFamily: "Liberation Sans"
+    property string fontFamily: "Inter"
     property double fontSize: 14
-    property real fontWeight: font.weight
+    property real fontWeight: 500
     property bool bold: font.bold
     property bool italic: font.italic
 
-    color: "black"
+    color: Theme.textPrimary
     font.pixelSize: fontSize
     font.family: fontFamily
     font.weight: fontWeight

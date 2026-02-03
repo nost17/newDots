@@ -1,16 +1,17 @@
 import QtQuick
+import "../Common"
 
 Item {
     id: root
     default property alias data: contentItem.data
-    property int radius: 0
-    property color bgNormal: "lightslategray"
-    property color bgActive: "darkseagreen"
+    property int radius: Theme.radius
+    property color bgNormal: Theme.backgroundSecondary
+    property color bgActive: Theme.accentPrimary
     property double padding: 6
     property bool active: false
     property bool centered: true
     property int borderWidth: 0
-    property color borderColor: "gray"
+    property color borderColor: Theme.borderColor
     property alias spacingChildrens: contentItem.spacing
     property alias leftPadding: contentItem.leftPadding
     property alias rightPadding: contentItem.rightPadding
@@ -57,7 +58,7 @@ Item {
             id: overlayRect
             anchors.fill: parent
             radius: root.radius
-            color: "black"
+            color: ColorUtils.isDark(Theme.overlay) ? Theme.textPrimary : Theme.textInverted
             opacity: {
                 if (root.pressed) {
                     return 0.2;
