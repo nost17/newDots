@@ -14,24 +14,28 @@ PanelWindow {
     Rectangle {
         id: barBackground
         anchors.fill: parent
+    }
+    Rectangle {
+        id: barMargin
+        anchors.fill: parent
         anchors.margins: 4
         anchors.leftMargin: 12
         anchors.rightMargin: 12
         readonly property int heightItems: rootBar.implicitHeight - anchors.margins * 2
         color: "transparent"
         RowLayout {
-            anchors.left: barBackground.left
+            anchors.left: barMargin.left
             spacing: 10
             Launcher {
-                implicitHeight: barBackground.heightItems
-                implicitWidth: barBackground.heightItems
+                implicitHeight: barMargin.heightItems
+                implicitWidth: barMargin.heightItems
             }
         }
         RowLayout {
-            anchors.right: barBackground.right
+            anchors.right: barMargin.right
             spacing: 10
             Clock {
-                implicitHeight: barBackground.heightItems
+                implicitHeight: barMargin.heightItems
             }
         }
     }
