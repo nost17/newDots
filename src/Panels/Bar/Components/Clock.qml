@@ -7,7 +7,7 @@ DsrButton {
     id: root
     property string localeDate: clock.date.toLocaleString(Qt.locale(), "ddd MM MMM")
     bgNormal: "transparent"
-    radius: root.width / 2
+    radius: Theme.radius
     borderWidth: root.hovered ? 1 : 0
     borderColor: Theme.borderColor
     leftPadding: padding * 2
