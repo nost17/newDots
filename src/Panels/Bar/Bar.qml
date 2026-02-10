@@ -21,8 +21,8 @@ PanelWindow {
         id: barMargin
         anchors.fill: parent
         anchors.margins: 4
-        anchors.leftMargin: 12
-        anchors.rightMargin: 12
+        anchors.leftMargin: 8
+        anchors.rightMargin: 8
         readonly property int heightItems: rootBar.implicitHeight - anchors.margins * 2
         color: "transparent"
         RowLayout {
@@ -35,7 +35,7 @@ PanelWindow {
         }
         RowLayout {
             anchors.right: barMargin.right
-            spacing: 10
+            spacing: 5
             Clock {
                 implicitHeight: barMargin.heightItems
             }
