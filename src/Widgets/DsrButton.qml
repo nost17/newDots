@@ -7,6 +7,7 @@ Item {
     property int radius: Theme.radius
     property color bgNormal: Theme.backgroundSecondary
     property color bgActive: Theme.accentPrimary
+    property color overlayColor: ColorUtils.isDark(Theme.overlay) ? Theme.textPrimary : Theme.textInverted
     property double padding: 6
     property bool active: false
     property bool centered: true
@@ -38,6 +39,18 @@ Item {
                 color: root.borderColor
                 width: root.borderWidth
             }
+            Behavior on border.color {
+                ColorAnimation {
+                    duration: 160
+                    easing.type: Easing.OutCubic
+                }
+            }
+            Behavior on border.width {
+                NumberAnimation {
+                    duration: 160
+                    easing.type: Easing.OutCubic
+                }
+            }
             Behavior on color {
                 ColorAnimation {
                     duration: 160
@@ -58,7 +71,7 @@ Item {
             id: overlayRect
             anchors.fill: parent
             radius: root.radius
-            color: ColorUtils.isDark(Theme.overlay) ? Theme.textPrimary : Theme.textInverted
+            color: root.overlayColor
             opacity: {
                 if (root.pressed) {
                     return 0.2;
