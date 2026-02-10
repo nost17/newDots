@@ -4,22 +4,28 @@ import Quickshell
 import qs.src.Widgets
 import "../../../Common"
 
-DsrIconButton {
+DsrButton {
     id: root
     onClicked: Quickshell.execDetached(["wofi", "--show", "drun"])
     bgNormal: "transparent"
-    name: "search"
     spacingChildrens: 6
-    radius: root.width / 2
-    borderWidth: root.hovered ? 1 : 0
-    borderColor: Theme.borderColor
+    radius: Theme.radius
+    borderWidth: 1
+    borderColor: hovered ? Theme.borderColor : "transparent"
+    overlayColor: Theme.accentPrimary
     leftPadding: padding * 2
     rightPadding: padding * 2
-    size: 20
+    DsrIcon {
+        name: "search"
+        color: root.hovered ? Theme.accentPrimary : Theme.textPrimary
+        size: 20
+        height: root.height - root.padding * 2
+    }
     DsrText {
         text: "Lanzar"
-        height: root.height - root.padding * 2
+        color: root.hovered ? Theme.accentPrimary : Theme.textPrimary
         fontSize: 14
         bold: true
+        height: root.height - root.padding * 2
     }
 }
