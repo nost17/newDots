@@ -1,9 +1,12 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import "../Common"
 
 Item {
     id: root
     default property alias data: contentItem.data
+    focus: true
+    activeFocusOnTab: true
     property int radius: Theme.radius
     property color bgNormal: Theme.backgroundSecondary
     property color bgActive: Theme.accentPrimary
@@ -13,6 +16,7 @@ Item {
     property bool centered: true
     property int borderWidth: 0
     property color borderColor: Theme.borderColor
+    property color borderFocusColor: Theme.tint
     property alias spacingChildrens: contentItem.spacing
     property alias leftPadding: contentItem.leftPadding
     property alias rightPadding: contentItem.rightPadding
@@ -26,6 +30,8 @@ Item {
 
     signal clicked
 
+    Keys.onReturnPressed: root.clicked()
+
     Item {
         implicitHeight: root.implicitHeight
         implicitWidth: root.implicitWidth
@@ -36,7 +42,7 @@ Item {
             color: root.active ? root.bgActive : root.bgNormal
             radius: root.radius
             border {
-                color: root.borderColor
+                color: root.activeFocus ? root.borderFocusColor : root.borderColor
                 width: root.borderWidth
             }
             Behavior on border.color {
@@ -73,10 +79,12 @@ Item {
             radius: root.radius
             color: root.overlayColor
             opacity: {
-                if (root.pressed) {
-                    return 0.2;
+                if (root.activeFocus && !root.pressed && !root.hovered) {
+                    return 0.05;
+                } else if (root.pressed) {
+                    return 0.25;
                 } else if (root.hovered) {
-                    return 0.1;
+                    return 0.15;
                 } else {
                     return 0;
                 }
