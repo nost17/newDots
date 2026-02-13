@@ -8,10 +8,10 @@ Item {
     property alias color: icon.color
     property real size: 18
     property bool filled: true
-    property real weight: filled ? 800 : 400
+    property real weight: filled ? 600 : 400
 
-    width: size
-    height: size
+    implicitWidth: Math.round(size)
+    implicitHeight: Math.round(size)
 
     FontLoader {
         id: materialFont
@@ -30,10 +30,12 @@ Item {
         renderType: Text.NativeRendering
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
+        layer.enabled: true
+        layer.smooth: true
+
         font.variableAxes: {
-            "FILL": fill
-            // "opsz": root.size,
-            // "wght": root.weight
+            "FILL": fill.toFixed(1),
+            "wght": fontInfo.weight
         }
     }
 }
