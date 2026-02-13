@@ -7,6 +7,9 @@ Singleton {
     function isDark(c: color): bool {
         return c.hslLightness < 0.45;
     }
+    function applyAlpha(c: color, a: double): color {
+        return Qt.rgba(c.r, c.g, c.b, a);
+    }
 
     function mixColor(color1: color, color2: color, weight: real): color {
         // Aseguramos que weight esté entre 0 y 1
