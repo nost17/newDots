@@ -9,12 +9,11 @@ PanelWindow {
     property bool isActive: true
     property Item content: null
     readonly property alias background: backgroundRect
+    color: "transparent"
 
     WlrLayershell.layer: WlrLayer.Top
     WlrLayershell.namespace: `dsr:${layerNamespace}`
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-
-    signal closed
 
     function open(): void {
         isActive = true;
@@ -60,7 +59,7 @@ PanelWindow {
 
         Connections {
             target: root
-            function onDirectContentChanged() {
+            function onContentChanged() {
                 if (root.content) {
                     root.content.parent = backgroundRect;
                     root.content.anchors.fill = backgroundRect;
