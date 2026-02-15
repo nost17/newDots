@@ -53,7 +53,7 @@ PanelWindow {
             if (root.content) {
                 root.content.parent = backgroundRect;
                 root.content.anchors.fill = backgroundRect;
-                Qt.callLater(() => root.content.forceActiveFocus());
+                // Qt.callLater(() => root.content.forceActiveFocus());
             }
         }
 
@@ -63,7 +63,7 @@ PanelWindow {
                 if (root.content) {
                     root.content.parent = backgroundRect;
                     root.content.anchors.fill = backgroundRect;
-                    Qt.callLater(() => root.content.forceActiveFocus());
+                    // Qt.callLater(() => root.content.forceActiveFocus());
                 }
             }
         }
