@@ -13,7 +13,8 @@ DsrWindow {
     isActive: loader.active
     focusable: isActive
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
-
+    exclusionMode: ExclusionMode.Ignore
+    WlrLayershell.layer: WlrLayer.Overlay
     property bool showActions: true
     readonly property var actionList: [
         {
@@ -46,7 +47,7 @@ DsrWindow {
     }
 
     onIsActiveChanged: {
-        root.content.children[0].forceActiveFocus();
+        actionGrid.children[0].forceActiveFocus();
     }
     onShowActionsChanged: {
         if (!showActions)
@@ -68,47 +69,66 @@ DsrWindow {
         Quickshell.execDetached(cmd.split(" "));
     }
 
-    implicitHeight: 100
-    implicitWidth: 500
+    implicitHeight: Screen.height
+    implicitWidth: Screen.width
     background.Keys.onEscapePressed: root.close()
-    content: GridLayout {
-        focus: true
-        rows: 1
-        columnSpacing: 10
-        anchors.margins: 10
-        uniformCellWidths: true
-        Repeater {
-            model: root.actionList
-            delegate: ActionButton {
-                required property var modelData
-                visible: root.showActions
-                name: modelData.icon
-                command: modelData.command
-                onClicked: {
-                    if (modelData.confirm) {
-                        root.startConfirm(command);
-                    } else {
+    background.color: ColorUtils.applyAlpha(Theme.overlay, 0.4)
+    content: Item {
+        MouseArea {
+            anchors.fill: parent
+            onClicked: root.close()
+        }
+        Rectangle {
+            width: 500
+            height: 100
+            anchors.centerIn: parent
+            color: Theme.backgroundPrimary
+            MouseArea {
+                anchors.fill: parent
+                onClicked: actionGrid.children[0].forceActiveFocus()
+                onPressed: actionGrid.children[0].forceActiveFocus()
+            }
+            GridLayout {
+                id: actionGrid
+                focus: true
+                rows: 1
+                columnSpacing: 10
+                anchors.fill: parent
+                anchors.margins: 10
+                uniformCellWidths: true
+                Repeater {
+                    model: root.actionList
+                    delegate: ActionButton {
+                        required property var modelData
+                        visible: root.showActions
+                        name: modelData.icon
+                        command: modelData.command
+                        onClicked: {
+                            if (modelData.confirm) {
+                                root.startConfirm(command);
+                            } else {
+                                root.execCommand(command);
+                            }
+                        }
+                    }
+                }
+                ActionButton {
+                    id: actionConfirmCancel
+                    visible: !root.showActions
+                    name: "close"
+                    onClicked: root.close()
+                }
+                ActionButton {
+                    id: actionConfirmOk
+                    visible: !root.showActions
+                    name: "check"
+                    onClicked: {
                         root.execCommand(command);
                     }
                 }
             }
         }
-        ActionButton {
-            id: actionConfirmCancel
-            visible: !root.showActions
-            name: "close"
-            onClicked: root.close()
-        }
-        ActionButton {
-            id: actionConfirmOk
-            visible: !root.showActions
-            name: "check"
-            onClicked: {
-                root.execCommand(command);
-            }
-        }
     }
-
     component ActionButton: DsrIconButton {
         readonly property color fgDimmed: Qt.lighter(Theme.textPrimary, Theme.darkTheme ? 0.8 : 3)
         property string command: ""
