@@ -33,8 +33,7 @@ Item {
     Keys.onReturnPressed: root.clicked()
 
     Item {
-        implicitHeight: root.implicitHeight
-        implicitWidth: root.implicitWidth
+        anchors.fill: parent
         scale: root.pressed ? 0.96 : 1
         Rectangle {
             id: backgroundRect
